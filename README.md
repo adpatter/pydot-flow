@@ -142,7 +142,7 @@ Image(chart.get_graph().create_png(prog="dot"))
 
 ![No Splines](https://raw.githubusercontent.com/faranalytics/pydot-flow/refs/heads/main/output-no-splines.png)
 
-Setting splines to `true` in the `Chart` constructor will yield a chart with splines.
+Setting the `splines` parameter to `true` in the `Chart` constructor will yield a chart with splines.
 
 ![Splines](https://raw.githubusercontent.com/faranalytics/pydot-flow/refs/heads/main/output-splines.png)
 
