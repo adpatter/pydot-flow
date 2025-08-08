@@ -41,7 +41,7 @@ def random_color():
 # 2. Create a Pydot flow Chart.
 chart = Chart(
     rankdir="TB",
-    splines="true",
+    splines="false",
     label="Chart",
     labelloc="t",
     fontname="Sans",
@@ -73,10 +73,12 @@ node_2a = node_1.flow(
     edge_attrs={"label": "Edge 1-2a"},
 )
 
-# 6. Flow from Node 2a to Node 3a.
+
+# 6. Flow from Node 2a to 3a.
 node_3a = node_2a.flow(
     src_port="s",
     dst_node_attrs={
+        "name": "Pink Elephants",  # You can optionally name your own Node.
         "label": "Node 3a",
         "shape": "square",
         "color": random_color(),
@@ -120,13 +122,17 @@ node_3b = node_2b.flow(
 
 # 10. Flow from Node 3b to Node 2c - reference Node 2c by name.
 node_3b.flow(
-    src_port="n",
+    src_port="e",
     dst_node_attrs={"name": node_2c.get_name()},
     edge_attrs={"label": "Edge 3b-2c"},
+).flow( # You can use method chaining.
+    src_port="s",
+    dst_node_attrs={"name": pydot.quote_if_necessary("Pink Elephants")},
+    edge_attrs={"label": "Edge 2c-3a"},
 )
 
 # 11. Save the graph image to a file.
-chart.get_graph().write_png("output.png")
+chart.get_graph().write_png("output-no-splines.png")
 
 # 12. Output an image in a Jupyter Notebook.
 Image(chart.get_graph().create_png(prog="dot"))
@@ -134,7 +140,12 @@ Image(chart.get_graph().create_png(prog="dot"))
 
 #### Output
 
-![Output](https://raw.githubusercontent.com/faranalytics/pydot-flow/refs/heads/main/output.png)
+![No Splines](https://raw.githubusercontent.com/faranalytics/pydot-flow/refs/heads/main/output-no-splines.png)
+
+Setting splines to "true" in the `Chart` constructor will yield a chart with splines.
+
+![Splines](https://raw.githubusercontent.com/faranalytics/pydot-flow/refs/heads/main/output-splines.png)
+
 
 ## Support
 

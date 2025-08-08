@@ -14,6 +14,7 @@ class Node:
         src_node_attrs: dict = None,
         src_node: pydot.Node = None,
         chart: "Chart" = None,
+        is_connected=True,
     ):
         self._chart = chart
         self._src_node_attrs = {} if src_node_attrs is None else src_node_attrs
@@ -25,7 +26,7 @@ class Node:
             self.graph.add_node(self._src_node)
         else:
             self._src_node = src_node
-            if self.get_node_by_name(src_node.get_name()) is None:
+            if not is_connected:
                 self.graph.add_node(self._src_node)
 
     def get_name(self) -> str:
@@ -63,24 +64,24 @@ class Node:
         dst_node_attrs = {} if dst_node_attrs is None else dst_node_attrs
         edge_attrs = {} if edge_attrs is None else edge_attrs
 
-        if dst_port is None:
-            dst_port = "".join(
-                [
-                    {"n": "s", "s": "n", "w": "e", "e": "w"}.get(direction)
-                    for direction in list(src_port)
-                ]
-            )
-
+        is_connected = False
         if "name" in dst_node_attrs:
-            dst_node_name = dst_node_attrs["name"]
+            dst_node_name = pydot.quote_if_necessary(dst_node_attrs["name"])
             del dst_node_attrs["name"]
             dst_node = self.get_node_by_name(dst_node_name)
+            if dst_node:
+                is_connected = True
+            else:
+                # The Node is not connected; hence, create a new Node.
+                dst_node = pydot.Node(name=dst_node_name, **dst_node_attrs)
         else:
             dst_node_name = "node_" + uuid.uuid4().hex
             dst_node = pydot.Node(name=dst_node_name, **dst_node_attrs)
 
         src_node_name = self._src_node.get_name()
 
+        if dst_port is None:
+            dst_port = self._get_dst_port(src_port)
         if "n" in src_port:
             src = src_node_name + ":" + src_port
             dst = dst_node_name + ":" + dst_port
@@ -116,4 +117,14 @@ class Node:
             src_node=dst_node,
             src_node_attrs=dst_node_attrs,
             chart=self._chart,
+            is_connected=is_connected,
         )
+
+    def _get_dst_port(self, src_port):
+        dst_port = "".join(
+            [
+                {"n": "s", "s": "n", "w": "e", "e": "w"}.get(direction)
+                for direction in list(src_port)
+            ]
+        )
+        return dst_port
