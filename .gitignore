@@ -162,4 +162,4 @@ cython_debug/
 #.idea/
 
 .archive
-/examples/output.png
+/examples/output*.png
