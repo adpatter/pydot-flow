@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "pydot_flow"
 dynamic = ["version"]
 authors = [
-  { name="Adam Patterson", email="adam@farar.net" },
+  { name="Adam Patterson", email="adpatter2000@gmail.com" },
 ]
 description = "Pydot _flow_ makes it a little easier to assemble simple flowing graphs using Pydot."
 readme = "README.md"
