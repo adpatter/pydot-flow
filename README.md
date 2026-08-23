@@ -140,14 +140,14 @@ Image(chart.get_graph().create_png(prog="dot"))
 
 #### Output
 
-![No Splines](https://raw.githubusercontent.com/far-analytics/pydot-flow/refs/heads/main/output-no-splines.png)
+![No Splines](https://raw.githubusercontent.com/adamjpatterson/pydot-flow/refs/heads/main/output-no-splines.png)
 
 Setting the `splines` parameter to `true` in the `Chart` constructor will yield a chart with splines.
 
-![Splines](https://raw.githubusercontent.com/far-analytics/pydot-flow/refs/heads/main/output-splines.png)
+![Splines](https://raw.githubusercontent.com/adamjpatterson/pydot-flow/refs/heads/main/output-splines.png)
 
 ## Support
 
-If you have a feature request or run into any issues, feel free to submit an [issue](https://github.com/far-analytics/pydot-flow/issues). You’re also welcome to reach out to one of the authors.
+If you have a feature request or run into any issues, feel free to submit an [issue](https://github.com/adamjpatterson/pydot-flow/issues). You’re also welcome to reach out to one of the authors.
 
-- [Adam Patterson](https://github.com/adpatter)
+- [Adam Patterson](https://github.com/adamjpatterson)
