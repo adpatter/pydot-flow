@@ -26,3 +26,6 @@ path = "src/pydot_flow/__about__.py"
 [project.urls]
 "Homepage" = "https://github.com/adamjpatterson/pydot-flow"
 "Bug Tracker" = "https://github.com/adamjpatterson/pydot-flow/issues"
+
+[tool.pytest.ini_options]
+python_files = ["test.py", "test_*.py", "*_test.py"]
